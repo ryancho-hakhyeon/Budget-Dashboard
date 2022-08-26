@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,
+          initial-scale=1.0">
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+        crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='styles/style.css') }}"
+    />
+</head>
+<body>
+    <header>
+        <!--    Sidebar    -->
+        <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+            <div class="position-sticky">
+                <div class="list-group list-group-flush mx-3 mt-4">
+                    <a href="/" class="list-group-item list-group-item-action py-2 ripple">
+                        <i class="bi bi-speedometer me-3"></i>
+                        <span class="fw-semibold fs-6">Main Dashboard</span>
+                    </a>
+                    <a href="/" class="list-group-item list-group-item-action py-2 ripple">
+                        <i class="bi bi-graph-up me-3"></i>
+                        <span class="fw-semibold fs-6">Analytics</span>
+                    </a>
+                    <a href="/" class="list-group-item list-group-item-action py-2 ripple">
+                        <i class="bi bi-pie-chart-fill me-3"></i>
+                        <span class="fw-semibold fs-6">SEO</span>
+                    </a>
+                    <a href="/" class="list-group-item list-group-item-action py-2 ripple">
+                        <i class="bi bi-calendar-event me-3"></i>
+                        <span class="fw-semibold fs-6">Calender</span>
+                    </a>
+                    <a href="/" class="list-group-item list-group-item-action py-2 ripple">
+                        <i class="bi bi-cash me-3"></i>
+                        <span class="fw-semibold fs-6">Total</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        <!--    Navbar    -->
+        <nav id="main-navbar" class="navbar navbar-expand-lg bg-white fixed-top">
+            <div class="container-fluid">
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#sidebarMenu"
+                    aria-controls="sidebarMenu"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <a class="navbar-brand" href="/">
+                    <img
+                       class="mt-1 ms-3"
+                       src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png"
+                       height="25"
+                       alt=""
+                       loading="lazy"
+                     />
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    {% block body %} {% endblock %}
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+        integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+        crossorigin="anonymous">
+    </script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous">
+    </script>
+</body>
+</html>
