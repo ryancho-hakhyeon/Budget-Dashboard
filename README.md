@@ -12,7 +12,7 @@ Also, it will represent the total annual income.</p>
 ```
 pip install flast
 ```
-* bootstrap, bootstrap-icon
+* bootstrap, fontawesome icon
 ```
 https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css
 https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css

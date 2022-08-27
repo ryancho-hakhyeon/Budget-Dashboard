@@ -1,9 +1,31 @@
+
+
 body {
     background-color: #fbfbfb;
 }
-@media (min-width: 991.98px) {
-    main {
-        padding-left: 240px;
+
+.container__content {
+    margin-top: 4.5rem;
+    margin-left: 15rem;
+}
+
+#container__dashboard {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 0;
+    flex-grow: 1;
+    margin-left: -225px;
+}
+
+@media (min-width: 991px) {
+    #container__dashboard {
+        margin-left: 0;
+        transition: margin 0.15s ease-in-out;
+    }
+    #card-container {
+        margin-top: 3.5rem;
     }
 }
 
@@ -19,7 +41,10 @@ body {
     z-index: 600;
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 992px) {
+    #card-container {
+        margin-top: 2rem;
+    }
     .sidebar {
         width: 100%;
     }

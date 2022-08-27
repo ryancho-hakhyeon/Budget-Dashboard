@@ -1,10 +1,60 @@
+
 {% extends 'base.html' %}
 
-{% block body %}
-<!--Main layout-->
-<main style="margin-top: 58px">
-  <div class="container pt-4">
-    <h1> text </h1>
+{% block title %} HOME {% endblock %}
+
+{% block content %}
+
+<div class="container" id="container__dashboard">
+  <h3>WELCOME TO DASHBOARD</h3>
+
+  <div class="row" style="margin-bottom:4.5rem" id="card-container">
+    <div class="col-xl-3 col-me-6">
+      <div class="card bg-primary text-white mb-4">
+        <div class="card-body">TOTAL INCOME</div>
+        <div class="card-body">CAD 00000</div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-me-6">
+      <div class="card bg-warning text-white mb-4">
+        <div class="card-body">TOTAL INCOME</div>
+        <div class="card-body">CAD 00000</div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-me-6">
+      <div class="card bg-info text-white mb-4">
+        <div class="card-body">TOTAL INCOME</div>
+        <div class="card-body">CAD 00000</div>
+      </div>
+    </div>
   </div>
-</main>
+
+  <div class="row">
+    <div class="col-xl-6">
+      <div class="card mb-4">
+        <div class="card-header">
+          <i class="fa-duotone fa-chart-mixed me-1"></i>
+
+        </div>
+        <div class="card-body">
+          <canvas></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-6">
+      <div class="card mb-4">
+        <div class="card-header">
+          <i class="fa-duotone fa-chart-pie me-1"></i>
+        </div>
+        <div class="card-body">
+          <canvas></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
 {% endblock %}
