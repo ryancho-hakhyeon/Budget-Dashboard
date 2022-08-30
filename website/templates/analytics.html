@@ -6,19 +6,99 @@
 {% block content %}
 
 <!--Main layout-->
-<main class="container" id="container__dashboard">
+<div class="container" id="container__dashboard">
   <div class="row ms-3 me-3" style="margin-bottom:4.5rem">
-    <h1> ANALYTICS </h1>
-    <div class="card mt-4 mb-4">
-      <div class="card-header">
-        <i class="fa-duotone fa-chart-mixed me-1">Chart</i>
+    <h1 class="m-4"> ANALYTICS - BAR / LINE</h1>
+
+    <form id="form" class="row" action="/Analytics" method="POST">
+      <div class="col-sm-3">
+        <select class="form-select form-select-sm"
+                aria-label="Small select"
+                name="line_year" required>
+          <option selected="">Year</option>
+          <option value="2020">2020</option>
+          <option value="2021">2021</option>
+          <option value="2022">2022</option>
+        </select>
       </div>
 
-      <div class="card-body">
-        <canvas></canvas>
+      <div class="col-sm-3">
+        <select class="form-select form-select-sm"
+                aria-label="Small select"
+                name="line_month" required>
+          <option selected="">Month</option>
+          <option value="Jun">June</option>
+          <option value="Jul">July</option>
+          <option value="Aug">August</option>
+        </select>
+      </div>
+
+      <div class="col-sm-3">
+        <button type="submit" class="btn btn-primary btn-sm">SUBMIT</button>
+      </div>
+    </form>
+
+    <div class="row">
+      <div class="col-xxl-6">
+        <div class="card mt-4 mb-4">
+          <div class="card-header">
+            <i class="fa-solid fa-chart-area me-1"></i>
+            <span class="fw-bold ms-3">{{ dataset.title }}</span>
+          </div>
+
+          <div class="card-body">
+            <canvas id="analytics-line-chart"></canvas>
+          </div>
+        </div>
       </div>
     </div>
+
   </div>
-</main>
+</div>
+
+{% block javascript %}
+<!-- JavaScript Start -->
+<script>
+
+
+const ctx = document.getElementById('analytics-line-chart').getContext('2d');
+const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: {{ dataset.labels | tojson }},
+        datasets: [{
+            label: '# of Votes',
+            data: {{ dataset.data | tojson }},
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+
+<!-- JavaScript End-->
+{% endblock %}
 
 {% endblock %}
