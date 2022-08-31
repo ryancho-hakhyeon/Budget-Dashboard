@@ -17,7 +17,7 @@ def analytics_page():
     datasets = Dataset().get_data()
     new_date = datasets.loc[(datasets['year'] == 2022) & (datasets['month'] == 'Aug')]
     print(new_date)
-    
+
     if request.method == 'POST':
         year = request.form.get('line_year')
         month = request.form.get('line_month')
