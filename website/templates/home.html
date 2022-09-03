@@ -12,19 +12,19 @@
     <div class="col-xl-3 col-me-6">
       <div class="card bg-primary text-white mb-4">
         <div class="card-body">TOTAL INCOME</div>
-        <div class="card-body">CAD 00000</div>
+        <div class="card-body">CAD {{ dataset.total_income }}</div>
       </div>
     </div>
     <div class="col-xl-3 col-me-6">
       <div class="card bg-warning text-white mb-4">
-        <div class="card-body">TOTAL INCOME</div>
-        <div class="card-body">CAD 00000</div>
+        <div class="card-body">TOTAL OUTCOME</div>
+        <div class="card-body">CAD {{ dataset.total_outcome }}</div>
       </div>
     </div>
     <div class="col-xl-3 col-me-6">
       <div class="card bg-info text-white mb-4">
-        <div class="card-body">TOTAL INCOME</div>
-        <div class="card-body">CAD 00000</div>
+        <div class="card-body">CURRENT BALANCE</div>
+        <div class="card-body">CAD {{ dataset.current_balance }}</div>
       </div>
     </div>
   </div>
@@ -37,7 +37,7 @@
 
         </div>
         <div class="card-body">
-          <canvas></canvas>
+          <canvas id="line-each-year"></canvas>
         </div>
       </div>
     </div>
@@ -49,7 +49,7 @@
         </div>
 
         <div class="card-body">
-          <canvas></canvas>
+          <canvas id="pie-each-year"></canvas>
         </div>
       </div>
     </div>
@@ -63,11 +63,44 @@
         </div>
 
         <div class="card-body">
-          <canvas></canvas>
+          
         </div>
       </div>
     </div>
   </div>
 </div>
+
+{% block javascript %}
+<!-- JavaScript Start -->
+<script>
+const ctx_line = document.getElementById('line-each-year').getContext('2d');
+const myChart_line = new Chart(ctx_line, {
+    type: 'bar',
+    data: {
+        labels: {{ dataset.income_each_year.label | tojson }},
+        datasets: [{
+            label: 'Income of Each Year',
+            data: {{ dataset.income_each_year.data | tojson }},
+            borderWidth: 1
+        },
+        {
+            label: 'Outcome of Each Year',
+            data: {{ dataset.outcome_each_year.data | tojson }},
+            borderWidth: 1
+        }]
+    },
+    options: {
+        barValueSpacing: 15,
+        scales: {
+          xAxes: [{ stacked: true }],
+          yAxes: [{ stacked: true }]
+        }
+    }
+});
+
+
+</script>
+<!-- JavaScript End-->
+{% endblock %}
 
 {% endblock %}
