@@ -8,7 +8,7 @@
 <div class="container" id="container__dashboard">
   <h3>WELCOME TO DASHBOARD</h3>
 
-  <div class="row" style="margin-bottom:4.5rem" id="card-container">
+  <div class="row mb-5" id="card-container">
     <div class="col-xl-3 col-me-6">
       <div class="card bg-primary text-white mb-4">
         <div class="card-body">TOTAL INCOME</div>
@@ -31,10 +31,10 @@
 
   <div class="row">
     <div class="col-xl-6">
-      <div class="card mb-4">
+      <div class="card mb-4 w-100 h-100">
         <div class="card-header">
           <i class="fa-solid fa-chart-area me-1"></i>
-
+          <span class="ms-2">{{ dataset.title }} - LINE CHART</span>
         </div>
         <div class="card-body">
           <canvas id="line-each-year"></canvas>
@@ -43,9 +43,10 @@
     </div>
 
     <div class="col-xl-6">
-      <div class="card mb-4">
+      <div class="card mb-4 w-100 h-100">
         <div class="card-header">
           <i class="fa-solid fa-chart-pie me-1"></i>
+          <span class="ms-2">{{ dataset.title }} - PIE CHART</span>
         </div>
 
         <div class="card-body">
@@ -57,13 +58,34 @@
 
   <div class="row">
     <div class="col-xxl-6">
-      <div class="card mb-4">
+      <div class="card mb-4 mt-3">
         <div class="card-header">
           <i class="fa-solid fa-table-list me-1"></i>
+          <span class="ms-2">{{ dataset.title }} - TABLE</span>
         </div>
 
         <div class="card-body">
-          
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">YEAR</th>
+                <th scope="col">MONTH</th>
+                <th scope="col">INCOME</th>
+                <th scope="col">OUTCOME</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{ dataset.total_each_month.map(() => {}) }}
+              <tr>
+                <th scope="row">1</th>
+                <td>2022</td>
+                <td>Sep</td>
+                <td>4500</td>
+                <td>123.50</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -81,11 +103,13 @@ const myChart_line = new Chart(ctx_line, {
         datasets: [{
             label: 'Income of Each Year',
             data: {{ dataset.income_each_year.data | tojson }},
+            backgroundColor: {{ dataset.income_each_year.bg_color | tojson }},
             borderWidth: 1
         },
         {
             label: 'Outcome of Each Year',
             data: {{ dataset.outcome_each_year.data | tojson }},
+            backgroundColor: {{ dataset.outcome_each_year.bg_color | tojson }},
             borderWidth: 1
         }]
     },

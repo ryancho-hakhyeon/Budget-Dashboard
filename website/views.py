@@ -16,17 +16,19 @@ def home_page():
     total_income = sum(income.values())
     total_outcome = round(sum(outcome.values()), 2)
     current_balance = total_income - total_outcome
+    print(total)
     chart_datasets = {
+        'title': 'Total Income & Outcome',
         'income_each_year': {
-            'title': '',
-            'data': income.values(),
-            'label': income.keys()
+            'bg_color': 'rgb(2, 117, 216)',
+            'data': list(income.values()),
+            'label': list(income.keys())
         },
         'total_income': '{:,.2f}'.format(total_income),
         'outcome_each_year': {
-            'title': '',
-            'data': outcome.values(),
-            'label': outcome.keys()
+            'bg_color': 'rgb(240, 173, 78)',
+            'data': list(outcome.values()),
+            'label': list(outcome.keys())
         },
         'total_outcome': '{:,.2f}'.format(total_outcome),
         'current_balance': '{:,.2f}'.format(current_balance),

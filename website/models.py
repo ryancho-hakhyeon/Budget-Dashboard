@@ -14,10 +14,10 @@ class Dataset:
         income_each_year = data.groupby('year')['income'].sum().to_dict()
         outcome_each_year = data.groupby('year')['outcome'].sum().to_dict()
 
-        total_year_month = data.groupby(['year', 'month']).agg(
+        total_year_month = data.groupby(['year', 'month'], sort=False).agg(
                 total_income=('income', 'sum'),
                 total_outcome=('outcome', 'sum')
-            ).reset_index().to_dict()
+            ).reset_index().to_dict(orient='records')
 
         # The same result
         # total_year_month = data.groupby(['year', 'month']).agg({'income':'sum', 'outcome':'sum' })
