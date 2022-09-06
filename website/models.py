@@ -48,4 +48,5 @@ class Dataset:
 # temp.set_year(2022)
 # temp.set_month('Jul')
 # temp.get_filter_data()['date'].values.tolist()
-# print(temp.get_filter_data())
+# result = temp.get_filter_data()
+# print(result)

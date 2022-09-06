@@ -1,3 +1,5 @@
+import json
+
 from flask import Blueprint, render_template, request
 from website.models import Dataset
 
@@ -16,7 +18,7 @@ def home_page():
     total_income = sum(income.values())
     total_outcome = round(sum(outcome.values()), 2)
     current_balance = total_income - total_outcome
-    print(total)
+
     chart_datasets = {
         'title': 'Total Income & Outcome',
         'income_each_year': {
@@ -45,7 +47,8 @@ def analytics_page():
         year = request.form.get('line_year')
         month = request.form.get('line_month')
         # setting year and month into Dataset
-        datasets.set_year(year)
+
+        datasets.set_year(int(year))
         datasets.set_month(month)
 
         new_data = datasets.get_filter_data()
@@ -66,9 +69,16 @@ def analytics_page():
         return render_template('analytics.html', dataset=chart_datasets)
 
 
-@views.route('/Analytics-pie')
+@views.route('/Analytics-pie', methods=['GET', 'POST'])
 def analytics_pie():
-    return render_template('detail-pie.html')
+    chart_datasets = {
+        'title': 'AUGUST DETAIL',
+        'data': [12, 19, 3, 5, 2, -3],
+        'labels': ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        'temp': [{'te': 222}, {'te': 111}]
+    }
+
+    return render_template('detail-pie.html', dataset=chart_datasets)
 
 
 @views.route('/Total-table')

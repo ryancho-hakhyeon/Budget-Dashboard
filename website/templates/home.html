@@ -34,7 +34,7 @@
       <div class="card mb-4 w-100 h-100">
         <div class="card-header">
           <i class="fa-solid fa-chart-area me-1"></i>
-          <span class="ms-2">{{ dataset.title }} - LINE CHART</span>
+          <span class="ms-2">{{ dataset.title }} - LINE</span>
         </div>
         <div class="card-body">
           <canvas id="line-each-year"></canvas>
@@ -46,7 +46,7 @@
       <div class="card mb-4 w-100 h-100">
         <div class="card-header">
           <i class="fa-solid fa-chart-pie me-1"></i>
-          <span class="ms-2">{{ dataset.title }} - PIE CHART</span>
+          <span class="ms-2">{{ dataset.title }} - PIE</span>
         </div>
 
         <div class="card-body">
@@ -65,7 +65,7 @@
         </div>
 
         <div class="card-body">
-          <table class="table">
+          <table class="table table-hover">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -75,15 +75,7 @@
                 <th scope="col">OUTCOME</th>
               </tr>
             </thead>
-            <tbody>
-              {{ dataset.total_each_month.map(() => {}) }}
-              <tr>
-                <th scope="row">1</th>
-                <td>2022</td>
-                <td>Sep</td>
-                <td>4500</td>
-                <td>123.50</td>
-              </tr>
+            <tbody id="table-body">
             </tbody>
           </table>
         </div>
@@ -95,6 +87,21 @@
 {% block javascript %}
 <!-- JavaScript Start -->
 <script>
+const table_data = {{ dataset.total_each_month | tojson }}
+
+var idx = 0
+table_data.map((data) => {
+  idx += 1
+  document.getElementById('table-body').innerHTML += `<tr>
+                                                        <th scope="row">${ idx }</th>
+                                                        <td>${ data.year }</td>
+                                                        <td>${ data.month }</td>
+                                                        <td>${ data.total_income }</td>
+                                                        <td>${ Math.round(data.total_outcome * 100) / 100 }</td>
+                                                      </tr>
+                                                      `
+})
+
 const ctx_line = document.getElementById('line-each-year').getContext('2d');
 const myChart_line = new Chart(ctx_line, {
     type: 'bar',
@@ -114,11 +121,7 @@ const myChart_line = new Chart(ctx_line, {
         }]
     },
     options: {
-        barValueSpacing: 15,
-        scales: {
-          xAxes: [{ stacked: true }],
-          yAxes: [{ stacked: true }]
-        }
+        barValueSpacing: 15
     }
 });
 
