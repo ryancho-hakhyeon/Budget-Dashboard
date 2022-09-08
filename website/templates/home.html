@@ -49,15 +49,19 @@
           <span class="ms-2">{{ dataset.title }} - PIE</span>
         </div>
 
-        <div class="card-body">
-          <canvas id="pie-each-year"></canvas>
+        <div class="card-body d-flex">
+          <canvas id="pie-total-rate" style="height:250px"></canvas>
+          <div class="position-absolute bottom-0 end-0 pe-4">
+            <p>Spending: <span id="outcome-rate"></span> %</p>
+            <p>Saving: <span id="balance-rate"></span> %</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-xxl-6">
+    <div class="col">
       <div class="card mb-4 mt-3">
         <div class="card-header">
           <i class="fa-solid fa-table-list me-1"></i>
@@ -75,7 +79,7 @@
                 <th scope="col">OUTCOME</th>
               </tr>
             </thead>
-            <tbody id="table-body">
+            <tbody class="table-group-divider" id="table-body">
             </tbody>
           </table>
         </div>
@@ -125,6 +129,36 @@ const myChart_line = new Chart(ctx_line, {
     }
 });
 
+var total = Number(({{ dataset.total_income | tojson}}).replace(/[^0-9.-]+/g,""))
+var outcome = Number(({{ dataset.total_outcome | tojson}}).replace(/[^0-9.-]+/g,""))
+var balance = Number(({{ dataset.current_balance | tojson}}).replace(/[^0-9.-]+/g,""))
+
+var outcome_rate = (outcome / total) * 100
+var balance_rate = (balance / total) * 100
+
+const pie_data = {
+  labels: ['Spending', 'Saving'],
+  datasets: [{
+    data: [Math.round(outcome_rate * 100) / 100, Math.round(balance_rate * 100) / 100],
+    backgroundColor: [
+      'rgb(240, 173, 78)',
+      'rgb(91, 192, 222)'
+    ]
+  }]
+}
+
+const ctx_pie = document.getElementById('pie-total-rate').getContext('2d');
+const myChart_pie = new Chart(ctx_pie, {
+    type: 'pie',
+    data: pie_data,
+    options: {
+      responsive: false,
+
+    }
+});
+
+document.getElementById('outcome-rate').innerHTML = Math.round(outcome_rate * 100) / 100
+document.getElementById('balance-rate').innerHTML = Math.round(balance_rate * 100) / 100
 
 </script>
 <!-- JavaScript End-->

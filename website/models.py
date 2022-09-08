@@ -9,7 +9,6 @@ class Dataset:
 
     def get_total_data(self):
         data = pd.read_csv('./dataset.csv')
-        # df = data['year'].unique()
 
         income_each_year = data.groupby('year')['income'].sum().to_dict()
         outcome_each_year = data.groupby('year')['outcome'].sum().to_dict()
@@ -28,8 +27,23 @@ class Dataset:
     def get_filter_data(self):
         data = pd.read_csv('./dataset.csv')
 
-        filtered_data = data.loc[(data['year'] == self.year) & (data['month'] == self.month)]
+        filtered_data = data.loc[(data['year'] == self.year) & (data['month'] == self.month)].reset_index(drop=True)
+
+        balance = 0
+        balance_col = []
+        for i in range(len(filtered_data)):
+            if filtered_data['income'][i] != 0:
+                balance += filtered_data['income'][i]
+            balance -= filtered_data['outcome'][i]
+            balance_col.append(balance)
+        filtered_data['balance'] = balance_col
         return filtered_data
+
+    def get_table_data(self):
+        df = pd.read_csv('./dataset.csv')
+        data = df.to_dict(orient='records')
+
+        return data
 
     def set_year(self, year):
         self.year = year
@@ -48,5 +62,5 @@ class Dataset:
 # temp.set_year(2022)
 # temp.set_month('Jul')
 # temp.get_filter_data()['date'].values.tolist()
-# result = temp.get_filter_data()
-# print(result)
+# t = temp.get_filter_data()
+

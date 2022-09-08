@@ -8,7 +8,7 @@
 <!--Main layout-->
 <div class="container" id="container__dashboard">
   <div class="row ms-3 me-3" style="margin-bottom:4.5rem">
-    <h1 class="m-4"> ANALYTICS - BAR / LINE</h1>
+    <h2 class="m-4"> ANALYTICS - BAR / LINE</h2>
 
     <form id="form" class="row" action="/Analytics" method="POST">
       <div class="col-sm-3">
@@ -27,9 +27,18 @@
                 aria-label="Small select"
                 name="line_month" required>
           <option selected="">Month</option>
+          <option value="Jan">January</option>
+          <option value="Feb">February</option>
+          <option value="Mar">March</option>
+          <option value="Apr">April</option>
+          <option value="May">May</option>
           <option value="Jun">June</option>
           <option value="Jul">July</option>
           <option value="Aug">August</option>
+          <option value="Sep">September</option>
+          <option value="Oct">October</option>
+          <option value="Nov">November</option>
+          <option value="Dec">December</option>
         </select>
       </div>
 
@@ -59,40 +68,36 @@
 {% block javascript %}
 <!-- JavaScript Start -->
 <script>
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+
 
 const ctx = document.getElementById('analytics-line-chart').getContext('2d');
 const myChart = new Chart(ctx, {
-    type: 'bar',
     data: {
         labels: {{ dataset.labels | tojson }},
         datasets: [{
-            label: '# of Votes',
-            data: {{ dataset.data | tojson }},
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
+            type: 'bar',
+            label: 'Income',
+            data: {{ dataset.data.income | tojson }},
+            backgroundColor: 'rgb(2, 117, 216)'
+        },
+        {
+            type: 'bar',
+            label: 'Outcome',
+            data: {{ dataset.data.outcome | tojson }},
+            backgroundColor: 'rgb(240, 173, 78)'
+         },
+        {
+            type: 'line',
+            label: 'Balance',
+            data: {{ dataset.data.balance | tojson }},
+            backgroundColor: 'rgb(91, 192, 222)',
+            borderColor: 'rgb(91, 192, 222)'
         }]
     },
     options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
+        barValueSpacing: 15
     }
 });
 </script>
